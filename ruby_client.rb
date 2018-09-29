@@ -21,7 +21,7 @@ while true
     response = JSON.parse(line)
     engine = Engine.new(response['data'], response['command'])
     rover = engine.rovers[0]
-    
+
     if engine.command == 'reset'
       moves = []
     end
@@ -47,7 +47,7 @@ while true
       STDOUT.flush
     else
       step = Step.new(engine.area, rover['x'], rover['y'])
-      step_move = step.move_steps_dig_no.sample || step.move_steps.sample
+      step_move = step.craters.sample || step.move_steps_dig_no.sample || step.move_steps.sample
 
       rover = engine.rovers[0]
       action_type = engine.base_rov ? 'move' : 'dig'
