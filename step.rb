@@ -13,9 +13,9 @@ class Step
 
   def call
     craters.sample ||
-    # rivers.sample ||
-    # hills.sample ||
-    # plain.sample ||
+    rivers.sample ||
+    hills.sample ||
+    plain.sample ||
     move_steps_dig_no.sample ||
     move_steps.sample
   end
