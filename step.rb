@@ -7,6 +7,19 @@ class Step
     @y = y
   end
 
+  def result
+    craters.sample || rivers.sample || hills.sample || plain.sample
+  end
+
+  def call
+    craters.sample ||
+    # rivers.sample ||
+    # hills.sample ||
+    # plain.sample ||
+    move_steps_dig_no.sample ||
+    move_steps.sample
+  end
+
   def move_steps
    results = []
 
@@ -51,5 +64,50 @@ class Step
      results << [x + 1, y + 1] if area.flatten[0] == 4
 
      results
+  end
+
+  def rivers
+    results = []
+    return results if area.flatten.size == 0
+    results << [x - 1, y - 1] if area.flatten[0] == 3
+    results << [x, y - 1] if area.flatten[0] == 3
+    results << [x + 1, y - 1] if area.flatten[0] == 3
+    results << [x - 1, y] if area.flatten[0] == 3
+    results << [x + 1, y] if area.flatten[0] == 3
+    results << [x - 1, y + 1] if area.flatten[0] == 3
+    results << [x, y + 1] if area.flatten[0] == 3
+    results << [x + 1, y + 1] if area.flatten[0] == 3
+
+    results
+  end
+
+  def hills
+    results = []
+    return results if area.flatten.size == 0
+    results << [x - 1, y - 1] if area.flatten[0] == 2
+    results << [x, y - 1] if area.flatten[0] == 2
+    results << [x + 1, y - 1] if area.flatten[0] == 2
+    results << [x - 1, y] if area.flatten[0] == 2
+    results << [x + 1, y] if area.flatten[0] == 2
+    results << [x - 1, y + 1] if area.flatten[0] == 2
+    results << [x, y + 1] if area.flatten[0] == 2
+    results << [x + 1, y + 1] if area.flatten[0] == 2
+
+    results
+  end
+
+  def plain
+    results = []
+    return results if area.flatten.size == 0
+    results << [x - 1, y - 1] if area.flatten[0] == 1
+    results << [x, y - 1] if area.flatten[0] == 1
+    results << [x + 1, y - 1] if area.flatten[0] == 1
+    results << [x - 1, y] if area.flatten[0] == 1
+    results << [x + 1, y] if area.flatten[0] == 1
+    results << [x - 1, y + 1] if area.flatten[0] == 1
+    results << [x, y + 1] if area.flatten[0] == 1
+    results << [x + 1, y + 1] if area.flatten[0] == 1
+
+    results
   end
 end
