@@ -31,10 +31,7 @@ while true
 
     data = JSON.parse(line)['data']
     engine = Engine.new(data)
-    puts engine.base
-
     step = Step.new(engine.area)
-    puts '*' * 100
 
     if engine.full?
       last_move = moves.pop
@@ -43,9 +40,6 @@ while true
       puts(JSON.generate([{:rover_id => 1, :action_type => 'move', :dx => next_move.dx, :dy => next_move.dy }]));
       STDOUT.flush
     else
-      puts '-' * 100
-      puts engine.base
-      puts '*' * 100
       action_type = %w(move dig).sample
       moves.push(dx: dx, dy: dy)
       puts(JSON.generate([{:rover_id => 1, :action_type => action_type, :dx => dx, :dy => dy}]));
