@@ -13,7 +13,6 @@ Random.srand()
 
 $stdout.sync = true
 
-full = false
 moves = []
 while true
   line = STDIN.gets
