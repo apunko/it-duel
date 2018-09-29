@@ -8,6 +8,7 @@ require 'rubygems'
 require 'json'
 require 'pry'
 require_relative 'engine'
+require_relative 'step'
 
 Random.srand()
 
@@ -31,6 +32,8 @@ while true
     data = JSON.parse(line)['data']
     engine = Engine.new(data)
     puts engine.base
+
+    step = Step.new(engine.area)
     puts '*' * 100
 
     action_type = %w(move dig).sample
