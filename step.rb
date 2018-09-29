@@ -24,7 +24,8 @@ class Step
 
   def move_steps_dig_no
      results = []
-
+     
+     return results if area.flatten.size == 0
      results << [x - 1, y - 1] unless area.flatten[0] == 5 || area[0][0]['objects'].include?(4)
      results << [x, y - 1] unless area.flatten[1] == 5 || area[0][1]['objects'].include?(4)
      results << [x + 1, y - 1] unless area.flatten[2] == 5 || area[0][2]['objects'].include?(4)
