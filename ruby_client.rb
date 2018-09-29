@@ -61,6 +61,7 @@ while true
         action_type = "charge"
       end
       next_move = { :dx => step_move.first - rover['x'], :dy => step_move.last - rover['y'] }
+      moves.push(next_move)
       # moves.push(dx: dx, dy: dy)
       puts(JSON.generate([{:rover_id => 1, :action_type => action_type, :dx => next_move[:dx], :dy => next_move[:dy]}]));
       STDOUT.flush
