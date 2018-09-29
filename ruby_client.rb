@@ -36,8 +36,15 @@ while true
     if engine.full?
       last_move = moves.pop
       next_move = { :dx => last_move[:dx] * (-1), :dy => last_move[:dy] * (-1) }
+      
+      rover = engine.rovers[0]
+      
+      action_type = "move"
+      if (rover.energy <= 0)
+        action_type = "charge"
+      end
 
-      puts(JSON.generate([{:rover_id => 1, :action_type => 'move', :dx => next_move[:dx], :dy => next_move[:dy] }]));
+      puts(JSON.generate([{:rover_id => 1, :action_type => action_type, :dx => next_move[:dx], :dy => next_move[:dy] }]));
       STDOUT.flush
     else
       rover = engine.rovers[0]
