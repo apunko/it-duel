@@ -7,10 +7,12 @@ logger = Logger.new('./log.txt')
 require 'rubygems'
 require 'json'
 require 'pry'
+require_relative 'engine'
 
 Random.srand()
 
 $stdout.sync = true
+
 
 while true
   line = STDIN.gets
@@ -27,9 +29,8 @@ while true
 
     puts '-' * 100
     data = JSON.parse(line)['data']
-    base = data['base']
-    rovers = data['rovers']
-    puts data
+    engine = Engine.new(data)
+    puts engine.base
     puts '*' * 100
 
     action_type = %w(move dig).sample
