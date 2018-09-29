@@ -40,7 +40,11 @@ while true
       puts(JSON.generate([{:rover_id => 1, :action_type => 'move', :dx => next_move.dx, :dy => next_move.dy }]));
       STDOUT.flush
     else
+      rover = engine.rovers[0]
       action_type = %w(move dig).sample
+      if (rover.energy <= 0)
+        action_type = "charge"
+      end
       moves.push(dx: dx, dy: dy)
       puts(JSON.generate([{:rover_id => 1, :action_type => action_type, :dx => dx, :dy => dy}]));
       STDOUT.flush
