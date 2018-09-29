@@ -50,8 +50,13 @@ while true
       STDOUT.flush
     else
       rover = engine.rovers[0]
-      action_type = %w(dig dig dig move dig dig dig dig dig).sample #data['step'] == 0 ? 'move' : 'dig'
-      action_type = 'move' if engine.area.flatten.size > 0 && engine.area[1][1]['terrain'] == 5
+      action_type = engine.base_rov ? 'move' : 'dig'
+
+logger.info("AREA #{engine.area.flatten}")
+      if (engine.area.flatten.size > 0 && engine.area[1][1]['terrain'] == 5) ||
+        engine.area.flatten.size == 0
+        action_type = 'move'
+      end
 
       if (rover['energy'] <= 0)
         action_type = "charge"
