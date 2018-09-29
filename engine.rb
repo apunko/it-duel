@@ -25,4 +25,8 @@ class Engine
   def load
     rover['load']
   end
+
+  def area
+    @rovers.first['area']
+  end
 end
