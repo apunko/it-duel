@@ -22,13 +22,6 @@ while true
 
     logger.info("MOVE: #{json}")
 
-    move = Random.rand(8)
-    if move > 3
-      move = move + 1
-    end
-    dx = move % 3 - 1
-    dy = move / 3 - 1
-
     data = JSON.parse(line)['data']
     engine = Engine.new(data)
     rover = engine.rovers[0]
@@ -36,6 +29,7 @@ while true
     step_move = step.move_steps.sample
 
     if engine.full?
+      logger.info("RETURNING #{moves.length}")
       last_move = moves.pop
       next_move = { :dx => last_move[:dx] * (-1), :dy => last_move[:dy] * (-1) }
 
