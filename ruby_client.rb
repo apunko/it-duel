@@ -29,6 +29,11 @@ while true
     end
 
     if engine.full?
+      logger.info('RETURNING')
+      logger.info(moves)
+      logger.info(moves.length)
+      logger.info('*'*10)
+      
       last_move = moves.pop
       next_move = { :dx => last_move[:dx] * (-1), :dy => last_move[:dy] * (-1) }
 
@@ -45,7 +50,6 @@ while true
       rover = engine.rovers[0]
       action_type = engine.base_rov ? 'move' : 'dig'
 
-      logger.info("AREA #{engine.area[1][1]['objects']}")
       if engine.command == 'reset' || engine.area[1][1]['objects'].include?(4)
         action_type = 'move'
       end
@@ -54,6 +58,8 @@ while true
         action_type = "charge"
       end
       next_move = { :dx => step_move.first - rover['x'], :dy => step_move.last - rover['y'] }
+      logger.info('NEXT MOVE')
+      logger.info(next_move)
       moves.push(next_move)
       # moves.push(dx: dx, dy: dy)
       puts(JSON.generate([{:rover_id => 1, :action_type => action_type, :dx => next_move[:dx], :dy => next_move[:dy]}]));

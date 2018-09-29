@@ -26,7 +26,7 @@ class Engine
   end
 
   def full?
-    load.size == 3
+    load.size == 1
   end
 
   def rover
