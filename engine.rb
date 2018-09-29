@@ -1,9 +1,10 @@
 class Engine
-  attr_accessor :base, :rovers
+  attr_accessor :base, :rovers, :command
 
-  def initialize(data)
+  def initialize(data, command)
     @base = data['base']
     @rovers = data['rovers']
+    @command = command
   end
 
   def return_to_base_if_full
