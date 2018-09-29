@@ -1,16 +1,24 @@
 class Step
-  attr_accessor :area
+  attr_accessor :area, :x, :y
 
-  def initialize(area)
+  def initialize(area, x, y)
     @area = area
+    @x = x
+    @y = y
   end
 
-  def analyze_object
-    area = "prettified: 3 3 3 | 1 6 1 | 1 1 1 | "
+  def move_steps
+   results = []
 
-    # 6 - base
-    # 5 - вулкан
+   results << [x - 1, y - 1] if area.flatten[0] != 5
+   results << [x, y - 1] if area.flatten[1] != 5
+   results << [x + 1, y - 1] if area.flatten[2] != 5
+   results << [x - 1, y] if area.flatten[3] != 5
+   results << [x + 1, y] if area.flatten[5] != 5
+   results << [x - 1, y + 1] if area.flatten[6] != 5
+   results << [x, y + 1] if area.flatten[7] != 5
+   results << [x + 1, y + 1] if area.flatten[7] != 5
 
-    
+   results
   end
 end
