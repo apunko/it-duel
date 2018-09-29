@@ -34,8 +34,13 @@ while true
       logger.info(last_move)
       logger.info('*'*10)
 
-      next_move = { :dx => last_move[:dx] * (-1), :dy => last_move[:dy] * (-1) }
-
+      if !last_move
+        step_m = engine.back_move
+        next_move = { :dx => step_m[0], :dy => step_m[1] }
+      else
+        next_move = { :dx => last_move[:dx] * (-1), :dy => last_move[:dy] * (-1) }
+      end
+      
       rover = engine.rovers[0]
 
       action_type = "move"
