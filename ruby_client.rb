@@ -40,7 +40,7 @@ while true
       rover = engine.rovers[0]
 
       action_type = "move"
-      if (rover.energy <= 0)
+      if (rover['energy'] <= 0)
         action_type = "charge"
       end
 
@@ -49,17 +49,15 @@ while true
     else
       rover = engine.rovers[0]
       action_type = %w(move dig).sample
-      action_type = 'move' if engine.area[4]['terrain'] == 5
+      action_type = 'move' if engine.area[1][1]['terrain'] == 5
 
-      if (rover.energy <= 0)
+      if (rover['energy'] <= 0)
         action_type = "charge"
       end
       moves.push(dx: dx, dy: dy)
       puts(JSON.generate([{:rover_id => 1, :action_type => action_type, :dx => dx, :dy => dy}]));
       STDOUT.flush
     end
-
-    puts engine.area
   rescue JSON::ParserError
     #don't print to output here, better to STDERR
     STDERR.puts('parse error')
