@@ -14,8 +14,16 @@ class Engine
 
   end
 
-  def is_full?
-    @rovers.first['load'].size == 3
+  def full?
+    load.size == 3
+  end
+
+  def rover
+    @rovers.first
+  end
+
+  def load
+    rover['load']
   end
 
   def area

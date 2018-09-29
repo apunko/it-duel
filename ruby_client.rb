@@ -14,11 +14,12 @@ Random.srand()
 
 $stdout.sync = true
 
-
+moves = []
 while true
   line = STDIN.gets
   begin
   	json = JSON.parse(line)
+
     logger.info("MOVE: #{json}")
 
     move = Random.rand(8)
@@ -28,7 +29,6 @@ while true
     dx = move % 3 - 1
     dy = move / 3 - 1
 
-    puts '-' * 100
     data = JSON.parse(line)['data']
     engine = Engine.new(data)
     puts engine.base
@@ -36,8 +36,21 @@ while true
     step = Step.new(engine.area)
     puts '*' * 100
 
-    action_type = %w(move dig).sample
-    puts(JSON.generate([{:rover_id => 1, :action_type => action_type, :dx => dx, :dy => dy}]));
+    if engine.full?
+      last_move = moves.pop
+      next_move = { :dx => last_move[:dx] * (-1), :dy => last_move[:dy] * (-1) }
+
+      puts(JSON.generate([{:rover_id => 1, :action_type => 'move', :dx => next_move.dx, :dy => next_move.dy }]));
+      STDOUT.flush
+    else
+      puts '-' * 100
+      puts engine.base
+      puts '*' * 100
+      action_type = %w(move dig).sample
+      moves.push(dx: dx, dy: dy)
+      puts(JSON.generate([{:rover_id => 1, :action_type => action_type, :dx => dx, :dy => dy}]));
+      STDOUT.flush
+    end
   rescue JSON::ParserError
     #don't print to output here, better to STDERR
     STDERR.puts('parse error')
