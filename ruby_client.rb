@@ -41,10 +41,13 @@ while true
       STDOUT.flush
     else
       action_type = %w(move dig).sample
+      action_type = 'move' if engine.area[4]['terrain'] == 5  
       moves.push(dx: dx, dy: dy)
       puts(JSON.generate([{:rover_id => 1, :action_type => action_type, :dx => dx, :dy => dy}]));
       STDOUT.flush
     end
+
+    puts engine.area
   rescue JSON::ParserError
     #don't print to output here, better to STDERR
     STDERR.puts('parse error')
