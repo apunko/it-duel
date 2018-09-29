@@ -18,17 +18,6 @@ moves = []
 while true
   line = STDIN.gets
   begin
-  	json = JSON.parse(line)
-
-    logger.info("MOVE: #{json}")
-
-    move = Random.rand(8)
-    if move > 3
-      move = move + 1
-    end
-    dx = move % 3 - 1
-    dy = move / 3 - 1
-
     response = JSON.parse(line)
     engine = Engine.new(response['data'], response['command'])
     rover = engine.rovers[0]
