@@ -31,7 +31,9 @@ while true
 
     data = JSON.parse(line)['data']
     engine = Engine.new(data)
-    step = Step.new(engine.area)
+    rover = engine.rovers[0]
+    step = Step.new(engine.area, rover['x'], rover['y'])
+    step_move = step.move_steps.sample
 
     if engine.full?
       last_move = moves.pop
@@ -54,7 +56,8 @@ while true
       if (rover['energy'] <= 0)
         action_type = "charge"
       end
-      moves.push(dx: dx, dy: dy)
+      moves.push(dx: step_move.first, dy: step_move.last)
+      # moves.push(dx: dx, dy: dy)
       puts(JSON.generate([{:rover_id => 1, :action_type => action_type, :dx => dx, :dy => dy}]));
       STDOUT.flush
     end
