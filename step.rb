@@ -8,14 +8,14 @@ class Step
   end
 
   def result
-    craters.sample || rivers.sample || hills.sample || plain.sample
+    move_steps_dig_no & craters
   end
 
   def call
-    craters.sample ||
-    rivers.sample ||
-    hills.sample ||
-    plain.sample ||
+    move_steps_dig_no & craters ||
+    move_steps_dig_no & rivers.sample ||
+    move_steps_dig_no & hills.sample ||
+    move_steps_dig_no & plain.sample ||
     move_steps_dig_no.sample ||
     move_steps.sample
   end
@@ -39,14 +39,14 @@ class Step
      results = []
 
      return results if area.flatten.size == 0
-     results << [x - 1, y - 1] unless area.flatten[0] == 5 || area[0][0]['objects'].include?(4)
-     results << [x, y - 1] unless area.flatten[1] == 5 || area[0][1]['objects'].include?(4)
-     results << [x + 1, y - 1] unless area.flatten[2] == 5 || area[0][2]['objects'].include?(4)
-     results << [x - 1, y] unless area.flatten[3] == 5 || area[1][0]['objects'].include?(4)
-     results << [x + 1, y] unless area.flatten[5] == 5 || area[1][2]['objects'].include?(4)
-     results << [x - 1, y + 1] unless area.flatten[6] == 5 || area[2][0]['objects'].include?(4)
-     results << [x, y + 1] unless area.flatten[7] == 5 || area[2][1]['objects'].include?(4)
-     results << [x + 1, y + 1] unless area[2][2]['objects'].include?(4) || area.flatten[8] == 5
+     results << [x - 1, y - 1] unless area.flatten[0] == 5 || area[0][0]['objects'].include?(4, 11)
+     results << [x, y - 1] unless area.flatten[1] == 5 || area[0][1]['objects'].include?(4, 11)
+     results << [x + 1, y - 1] unless area.flatten[2] == 5 || area[0][2]['objects'].include?(4, 11)
+     results << [x - 1, y] unless area.flatten[3] == 5 || area[1][0]['objects'].include?(4, 11)
+     results << [x + 1, y] unless area.flatten[5] == 5 || area[1][2]['objects'].include?(4, 11)
+     results << [x - 1, y + 1] unless area.flatten[6] == 5 || area[2][0]['objects'].include?(4, 11)
+     results << [x, y + 1] unless area.flatten[7] == 5 || area[2][1]['objects'].include?(4, 11)
+     results << [x + 1, y + 1] unless area[2][2]['objects'].include?(4, 11) || area.flatten[8] == 5
 
      results
   end
