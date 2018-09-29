@@ -1,5 +1,9 @@
 #!/usr/bin/env ruby
 
+require 'logger'
+
+logger = Logger.new('./log.txt')
+
 require 'rubygems'
 require 'json'
 
@@ -10,7 +14,8 @@ $stdout.sync = true
 while true
   line = STDIN.gets
   begin
-  	# json = JSON.parse(line)
+  	json = JSON.parse(line)
+    logger.info("MOVE: #{json}")
     move = Random.rand(8)
     if move > 3
       move = move + 1
