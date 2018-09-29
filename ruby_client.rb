@@ -35,6 +35,10 @@ while true
     step = Step.new(engine.area, rover['x'], rover['y'])
     step_move = step.move_steps.sample
 
+    if engine.command == 'reset'
+      moves = []
+    end
+
     if engine.full?
       last_move = moves.pop
       next_move = { :dx => last_move[:dx] * (-1), :dy => last_move[:dy] * (-1) }
