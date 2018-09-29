@@ -22,7 +22,7 @@ while true
     engine = Engine.new(response['data'], response['command'])
     rover = engine.rovers[0]
     step = Step.new(engine.area, rover['x'], rover['y'])
-    step_move = step.move_steps.sample
+    step_move = step.move_steps_dig_no.sample || step.move_steps.sample
 
     if engine.command == 'reset'
       moves = []
