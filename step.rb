@@ -6,8 +6,11 @@ class Step
   end
 
   def analyze_object
-    area.each do |step|
-      puts 'step'
-    end
+    area = "prettified: 3 3 3 | 1 6 1 | 1 1 1 | "
+
+    # 6 - base
+    # 5 - вулкан
+
+    
   end
 end

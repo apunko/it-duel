@@ -37,11 +37,23 @@ while true
       last_move = moves.pop
       next_move = { :dx => last_move[:dx] * (-1), :dy => last_move[:dy] * (-1) }
 
-      puts(JSON.generate([{:rover_id => 1, :action_type => 'move', :dx => next_move.dx, :dy => next_move.dy }]));
+      rover = engine.rovers[0]
+
+      action_type = "move"
+      if (rover.energy <= 0)
+        action_type = "charge"
+      end
+
+      puts(JSON.generate([{:rover_id => 1, :action_type => action_type, :dx => next_move[:dx], :dy => next_move[:dy] }]));
       STDOUT.flush
     else
+      rover = engine.rovers[0]
       action_type = %w(move dig).sample
-      action_type = 'move' if engine.area[4]['terrain'] == 5  
+      action_type = 'move' if engine.area[4]['terrain'] == 5
+
+      if (rover.energy <= 0)
+        action_type = "charge"
+      end
       moves.push(dx: dx, dy: dy)
       puts(JSON.generate([{:rover_id => 1, :action_type => action_type, :dx => dx, :dy => dy}]));
       STDOUT.flush

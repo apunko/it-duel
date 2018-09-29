@@ -27,6 +27,6 @@ class Engine
   end
 
   def area
-    @rovers.first['area']
+    rover['area']
   end
 end
