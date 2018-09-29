@@ -26,7 +26,9 @@ while true
     dy = move / 3 - 1
 
     puts '-' * 100
-    data, base, rovers = get_data(line)
+    data = JSON.parse(line)['data']
+    base = data['base']
+    rovers = data['rovers']
     puts data
     puts '*' * 100
 
@@ -36,12 +38,4 @@ while true
     #don't print to output here, better to STDERR
     STDERR.puts('parse error')
   end
-end
-
-def get_data(line)
-  data = JSON.parse(line)['data']
-  base = data['base']
-  rovers = data['rovers']
-
-  [data, base, rovers]
 end
